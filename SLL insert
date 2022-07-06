@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int a;
+	struct node *link;
+};
+
+int main(){
+	int ch;
+	while(1)
+	{
+		printf("Enter /n 1) To insert\n2)To delete\n 3)To print\n 4)Exit\n");
+		scanf("%d",&ch);
+		
+		switch(ch){
+			case 1: printf("Enter element to insert\n");
+			scanf("%d",&a);
+			insert(&head,a);
+			break;
+			case 2: delete(&head);
+			break;
+			case 3: print(&head);
+			break;
+			case 4: exit(0);
+			break; 
+		}
+		
+	}
+	return 0;
+}
+
+
+void insert(struct node **head,int a)
+{
+	struct node *new=(struct node *)malloc(sizeof(struct node));
+	if(new==NULL)
+	{
+		printf("Memory is not allocated");
+		}
+		else
+		 {
+		 	new->a=a;
+		 	new->link=NULL;
+			
+		}
+}
+
+
