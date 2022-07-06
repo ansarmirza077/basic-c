@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<conio.h>
+
+struct node{
+	int a;
+	struct node *link;//pointer declared(data type struct node) 
+};
+//above structure is called self referential structure
+
+int main(){
+	struct node *pl[3];
+	p[0]=(struct node*)malloc(sizeof(struct node));
+	p[1]=(struct node*)malloc(sizeof(struct node));  //malloc dynamically allocates memory and returns void pointer so typecasted to structnode
+	p[2]=(struct node*)malloc(sizeof(struct node));
+	
+	p[0]->link=p[1];  //link part of p[0] node is assigned with address of p[1] 
+	p[1]->link=p[2];
+	p[2]->link=NULL;   //Link established netween nodes
+	
+	struct node *head;  //in order to store address of 1st node we need head pointer hence decleared here
+	head=p[0]; //line 13(node 2) contains address of 3rd node hence both are connected, here head is storing address of p[0]  hence head and node1 connected
+	//above head is pointer so stores address of p[0] (not data)
+	head->a=10; // head holds only address so a means 1st node a not head pointer a part
+	p[0]->a=10;
+	head->link->a=20; // imp: means head has address of 1st node ->link means that address link(link also has adddress )->a means link address node a =20 
+	//first node link then that link referring to some address that address a th part is 20
+	head->link->link->a=30; //(head) address->address->address->a th value is 30
+	
+	return 0;
+	
+	
+}
