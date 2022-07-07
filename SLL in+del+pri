@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int data;
+	struct node *link;
+};
+
+struct node  *head;
+//struct node *new;
+
+void insert(int data) //adding at first
+{
+	struct node *new ;
+	new=(struct node*)malloc(sizeof(struct node));
+	new->data=data;
+	new->link=NULL;
+	//if(*head==NULL)
+	//*head =new;
+	
+}
+
+
+void deletenode(int data)
+{
+	struct node *temp;
+	if(head->data==data)
+	{
+		temp=head;
+		head=head->link;
+		free(temp);
+	}
+	else {
+		struct node *current = head;
+		while(current->link!=NULL)
+		{
+			if(current->link->data==data){
+				temp=current->link;
+				current->link=current->link->link;
+				free(temp);
+				break;
+			}
+			else current =current->link;
+		}
+	}
+}
+
+void printlist(struct node *head){
+	struct node *temp=head;
+while(temp!=NULL)
+{
+	printf("%d->",temp->data);
+	temp=temp->link;
+}
+}
+
+
+
+int main(){
+int ch,data;
+
+do 
+	{
+		printf("Enter /n 1) To insert\n2)To delete\n 3)To print\n 4)Exit\n");
+		scanf("%d",&ch);
+		
+		switch(ch){
+			case 1: printf("Enter element to insert\n");
+			scanf("%d",&data);
+			insert(data);
+			break;
+			case 2: deletenode(data);
+			break;
+		//	case 3: printlist(&head);
+			break;
+			case 4: exit(0);
+			break; 
+			default : printf("Invalid choice");
+		}
+	} while (ch != 0);
+	return 0;
+}
