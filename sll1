@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int data;
+	struct node *link;
+};
+
+struct node *head=NULL;
+//struct node *temp=head;
+
+void add_fir(struct node *head,int val)
+{
+	
+	struct node *newnode=(struct node*)malloc(sizeof(struct node));
+	newnode -> data = val;
+	newnode->link = head;
+	head = newnode;
+	
+
+
+//void print_list(struct node *head){
+
+	struct node *temp ;
+		temp =head;
+	if(head == NULL)printf("List is empty");
+	else {
+	
+	while(temp!=NULL)
+	{
+		printf("%d\t",temp->data);
+		temp=temp->link;
+	}
+}
+}
+
+void add_last(){
+	struct node *temp;
+	temp=head;
+	int val=20;
+struct node *ptr=(struct node*)malloc(sizeof(struct node));
+ptr->data=val;
+ptr->link=NULL;
+while(temp->link != NULL)
+{
+	temp=temp->link;
+}
+temp->link=ptr;	
+}
+
+
+void add_at_pos(){
+int pos,val;
+struct node *head;
+
+	struct node*temp=head;
+	struct node *ptr2= (struct node*)malloc(sizeof(struct node));
+	ptr2->data=val;
+	ptr2->link=NULL;
+	pos--;
+	while(pos!=1){
+		temp=temp->link;
+		pos--;
+	}
+	ptr2->link=temp->link;
+	temp->link=ptr2;
+
+}
+
+
+
+
+
+
+int main()
+{
+	
+	int ch,i;
+	while(1){
+		
+	
+	printf("Enter 1.TO addfir \t 2.Add at last \t 3.Add at position \t4.To exit");
+	scanf("%d",&ch);
+
+	switch(ch){
+		int val;
+	case 1: printf("Enter element to insert \n ");
+			scanf("%d",&val);
+			add_fir(head,val); break;
+			//case 2: 
+//	case 2 : delete_node(); break;
+	//case 3 : 
+	
+	
+
+	case 2 : add_last(); break;
+	case 3 : add_at_pos(); break;
+	case 4 : exit(0);break;
+	
+	default : printf("INvalid option");		
+		
+	}	
+	
+}
+return 0;
+}
