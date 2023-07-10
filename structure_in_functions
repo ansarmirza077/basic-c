@@ -1,0 +1,159 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+
+// typedef struct point {
+//     double x,y;
+
+// }point;
+
+// point middlefunc( point  a, point b)
+// {
+//     point m;
+//     m.x=(a.x+b.x)/2;                                 values are passed here so next pass by reference 
+//     m.y=(a.y+b.y)/2;
+//     return m;
+// }
+
+// int main()
+// {
+//     point p1={
+//         .x=1,
+//         .y=1
+//     };
+// point p2={
+//     .x=3,
+//     .y=2
+// };
+// point middle;
+// middle = middlefunc(p1,p2);
+// printf("%lf %lf",middle.x,middle.y);
+
+// }
+
+// typedef struct point {
+//     double x,y;
+
+// }point;
+
+// point middlefunc(const point * a,const point* b)
+// {
+//     point m;
+//     m.x=(a->x+b->x)/2;
+//     m.y=(a->y+b->y)/2;
+//     return m;
+// }
+
+// int main()
+// {
+//     point p1={
+//         .x=1,
+//         .y=1
+//     };
+// point p2={
+//     .x=3,
+//     .y=2
+// };
+// point middle;
+// middle = middlefunc(&p1,&p2);          //passby reference
+// printf("%lf %lf",middle.x,middle.y);
+
+// }
+
+
+// typedef struct point {
+//     double x,y;
+
+// }point;
+
+// point* middlefunc(const point * a,const point* b)  //point* is pointer to above structure
+// {
+//     point m;
+//     m.x=(a->x+b->x)/2;
+//     m.y=(a->y+b->y)/2;      //point m is on stack means once we are out of the function it gets destroyed hence point m memory deallocated 
+//     return &m;
+// }
+
+// int main()
+// {
+//     point p1={
+//         .x=1,
+//         .y=1
+//     };
+// point p2={
+//     .x=3,
+//     .y=2
+// };
+// point middle;
+// middle = *middlefunc(&p1,&p2);         // m is on stack which may give error in case of more lines of code    so....next
+// printf("%lf %lf",middle.x,middle.y);
+
+// }
+
+// typedef struct point {
+//     double x,y;
+
+// }point;
+
+// point* middlefunc(const point * a,const point* b)  //point * is pointer to above structure
+// {
+//     point* m=malloc (sizeof(point));
+//     m->x=(a->x+b->x)/2;
+//     m->y=(a->y+b->y)/2;      //point m is on stack means once we are out of the function it gets destroyed hence point m memory deallocated 
+//     return m;
+// }
+
+// int main()
+// {
+//     point p1={
+//         .x=1,
+//         .y=1
+//     };
+// point p2={
+//     .x=3,
+//     .y=2
+// };
+// point middle;
+// middle = *middlefunc(&p1,&p2);         // m is on stack -->
+// printf("%lf %lf",middle.x,middle.y);
+
+// }
+
+//above has solved the problem of stack by dynamic memory alllocation but now we have to deal with malloc 
+
+
+typedef struct point {
+    double x,y;
+
+}point;
+
+void middlefunc(const point * a,const point* b,point *out)  //point * is pointer to above structure
+{
+   // point* m=malloc (sizeof(point));
+    out->x=(a->x+b->x)/2;
+    out->y=(a->y+b->y)/2;      //point m is on stack means once we are out of the function it gets destroyed hence point m memory deallocated 
+    //return m;
+}
+
+int main()
+{
+    point p1={
+        .x=1,
+        .y=1
+    };
+point p2={
+    .x=3,
+    .y=2
+};
+point middle;
+ middlefunc(&p1,&p2,&middle);         // m is on stack -->
+printf("%lf %lf",middle.x,middle.y);
+//free(middlefunc);  //memory allocated somewhere in above function  and here we are freeing it
+
+}
+
+
+/* conclusion instead of using pass by value and malloc pointer we took extra variable as pointer "middle" as parameter to function middlefunc ,
+deference it as out and stored structure values in it hence utilized extra pointer to display function values */
